@@ -31,7 +31,8 @@ def result():
             data = json.load(json_file)
         if sub_type == 'Sequence':
             data = data[0]
-            data['10fold'] = utils.floor_10fold(data['10fold'])
+            data['tfaverage'] = utils.floor(data['tfaverage'])
+            data['tfpmmedian'] = utils.floor(data['tfpmmedian'])
             return render_template("result.html", seq=True, result=data, name=name)
         elif sub_type == 'Fasta':
             return render_template("result.html", seq=False, name=name)

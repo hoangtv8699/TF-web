@@ -8,8 +8,8 @@ from Bio import SeqIO
 DIR_REQUESTS = 'requests/'
 DIR_RESPONSES = 'responses/'
 
-DIR_REMOTE_RESPONSES = 'Antioxidant_API/responses/'
-DIR_REMOTE_REQUESTS = 'Antioxidant_API/data/fasta/'
+DIR_REMOTE_RESPONSES = 'TF_API/responses/'
+DIR_REMOTE_REQUESTS = 'TF_API/data/fasta/'
 
 
 def create_file_name():
@@ -44,6 +44,7 @@ def transfer(filename):
         sftp.close()
         return True
     except Exception as e:
+        print(e)
         return False
 
 
@@ -79,4 +80,10 @@ def floor_10fold(fold):
     for key, value in fold.items():
         value[0] = math.floor(value[0] * 1000) / 1000
         value[1] = math.floor(value[1] * 1000) / 1000
+    return fold
+
+
+def floor(fold):
+    fold[0] = math.floor(fold[0] * 1000) / 1000
+    fold[1] = math.floor(fold[1] * 1000) / 1000
     return fold
