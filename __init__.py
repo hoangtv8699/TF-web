@@ -14,15 +14,16 @@ def index():
 @app.route("/predict", methods=['POST'])
 def result():
     global name
-    sub_type = request.form['radio']
+    classification_type = request.form['radio1']
+    sub_type = request.form['radio2']
 
     if sub_type == 'Sequence':
         seq = request.form['seq']
-        name = utils.save_seq(seq)
+        name = utils.save_seq(seq, type=classification_type)
     elif sub_type == 'Fasta':
         if request.files.get('fasta'):
             fasta = request.files['fasta']
-            name = utils.save_fasta(fasta)
+            name = utils.save_fasta(fasta, type=classification_type)
             if not name:
                 return render_template("home.html", alert=True)
 
@@ -33,7 +34,7 @@ def result():
             data = data[0]
             data['tfaverage'] = utils.floor(data['tfaverage'])
             data['tfpmmedian'] = utils.floor(data['tfpmmedian'])
-            return render_template("result.html", seq=True, result=data, name=name)
+            return render_template("result.html", seq=True, result=data, name=name, type=int(classification_type))
         elif sub_type == 'Fasta':
             return render_template("result.html", seq=False, name=name)
 

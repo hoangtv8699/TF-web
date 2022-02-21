@@ -12,42 +12,66 @@
 	<div class="content-div">
 		<div class="form">
 			<form name="myForm" action="/confirm" onsubmit="return validateForm()" method = "POST">
-				<div class="hex">
-					<div class="text">
-						Your Result
-					</div>
-				</div>
-				<div class="ribbon2">
-					<i></i>
-					<i></i>
-					<div class="resulttext">
-						{% if seq %}
-							Sequence: {{ result['seq'] }}
-							<br/>
-							<table>
-								<tr>
-									<td>TF Classification Ensemble Average 5 fold:</td>
-									<td>{{ result['tfaverage'] }}</td>
-								</tr>
-								<tr>
-									<td>TF Classification result:</td>
-									<td>{{ result['label1'] }}</td>
-								</tr>
-								<tr>
-									<td>TFPM Classification Ensemble Median 5 fold:</td>
-									<td> {{ result['tfpmmedian'] }}</td>
-								</tr>
-								<tr>
-									<td>TFPM Classification result:</td>
-									<td>{{ result['label2'] }}</td>
-								</tr>
-							</table>
-						{% endif %}
-						<br>
-						<a href="{{ url_for('download', filename=name) }}">Download your full result with PSSM here!</a>
-						
-					</div>
-				</div>
+				<fieldset class="result">
+						<legend class="label">
+							Your Result
+						</legend>
+						<div class="resulttext">
+							{% if seq %}
+								Sequence: {{ result['seq'] }}
+								<br/>
+								<table>
+									{% if type == 0 %}
+									<tr>
+										<td>TF Classification Ensemble Average 5 fold:</td>
+										<td>{{ result['tfaverage'] }}</td>
+									</tr>
+									<tr>
+										<td>TF Classification result:</td>
+										<td>{{ result['label1'] }}</td>
+									</tr>
+										{% if result['label1'] == 'Transcription Factor' %}
+										<tr>
+											<td>TFPM Classification Ensemble Median 5 fold:</td>
+											<td> {{ result['tfpmmedian'] }}</td>
+										</tr>
+										<tr>
+											<td>TFPM Classification result:</td>
+											<td>{{ result['label2'] }}</td>
+										</tr>
+										{% else %}
+										<tr>
+											<td>Sequence isn't a Transcription Factor so it not a Transcription Factor Prefer Methylated DNA</td>
+										</tr>
+										{% endif %}
+									{% elif type == 1 %}
+									<tr>
+										<td>TF Classification Ensemble Average 5 fold:</td>
+										<td>{{ result['tfaverage'] }}</td>
+									</tr>
+									<tr>
+										<td>TF Classification result:</td>
+										<td>{{ result['label1'] }}</td>
+									</tr>
+									{% elif type == 2 %}
+									<tr>
+										<td>TF Classification Ensemble Average 5 fold:</td>
+										<td>{{ result['tfaverage'] }}</td>
+									</tr>
+									<tr>
+										<td>TF Classification result:</td>
+										<td>{{ result['label1'] }}</td>
+									</tr>
+									{% endif %}
+								</table>
+							{% endif %}
+							<br>
+							<a href="{{ url_for('download', filename=name) }}">Download your full result with PSSM here!</a>
+							
+						</div>
+				</fieldset>
+					
+				
 			</form>
 		</div>
 	</div>

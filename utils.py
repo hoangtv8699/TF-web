@@ -48,8 +48,8 @@ def transfer(filename):
         return False
 
 
-def save_seq(seq):
-    file_name = create_file_name()
+def save_seq(seq, type):
+    file_name = type + '_' + create_file_name()
     file_path = DIR_REQUESTS + file_name + '.fasta'
     f_request = open(file_path, "w")
     f_request.write(seq)
@@ -57,8 +57,8 @@ def save_seq(seq):
     return file_name
 
 
-def save_fasta(fasta_file):
-    file_name = create_file_name()
+def save_fasta(fasta_file, type):
+    file_name = type + '_' + create_file_name()
     fasta_file.save(DIR_REQUESTS + file_name + '.fasta')
     if not check_fasta(file_name):
         os.remove(DIR_REQUESTS + file_name + '.fasta')

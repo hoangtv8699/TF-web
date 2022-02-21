@@ -9,34 +9,39 @@
 </head>
 <body>
 	{% include 'header.html' %}
+	<div class="img"></div>
 	<div class="content-div">
 		<div class="form">
 			<form action = "/predict" method="POST" enctype = "multipart/form-data" name="myForm" onsubmit="return loader()">
-				<div class="hex">
-					<div class="text">
-						Input Your FASTA Sequence
-					</div>
-				</div>
-				<div class="ribbon2">
-					<i></i>
-					<i></i>
+				<fieldset class="input1">
+					<legend class="text">Input Your FASTA Sequence</legend>
 					<textarea class="seq" name="seq" placeholder=""></textarea>
-				</div>
-				<div class="labelfile">Or submit fasta file!</div>
-				<div class="file">
+				</fieldset>
+				<fieldset class="input2">
+					<legend class="labelfile">Or submit fasta file!</legend>
 					<input type="file" name="fasta" id="file-upload" class="inputfile"/>
-					<label for="file-upload">
-						<span id="filename">No file chosen...</span>
-						<strong>Choose FASTA file!</strong>
+				</fieldset>
+				<div class="radio" id="radio1">
+					<label class="container">TF + TFPM Classification
+					<input type="radio" checked="checked" name="radio1" value="0" id="0" >
+					<span class="checkmark"></span>
+					</label>
+					<label class="container">TF Classification
+					<input type="radio" name="radio1" value="1" id="1">
+					<span class="checkmark"></span>
+					</label>
+					<label class="container">TFPM Classification
+					<input type="radio" name="radio1" value="2" id="2" >
+					<span class="checkmark"></span>
 					</label>
 				</div>
-				<div class="radio" id="radio">
+				<div class="radio" id="radio2">
 					<label class="container">FASTA Sequence
-					<input type="radio" checked="checked" name="radio" value="Sequence" id="Sequence">
+					<input type="radio" checked="checked" name="radio2" value="Sequence" id="Sequence">
 					<span class="checkmark"></span>
 					</label>
 					<label class="container">FASTA file
-					<input type="radio" name="radio" value="Fasta" id="Fasta" >
+					<input type="radio" name="radio2" value="Fasta" id="Fasta" >
 					<span class="checkmark"></span>
 					</label>
 				</div>	
@@ -44,7 +49,6 @@
 					<input type="submit" class="submit" value="Submit"/>
 					<input type="reset" class="clear" value="Clear">
 				</div>
-				<!-- MUTLI SPINNER -->
 				<div id="loader-container">
 					<div class="loader-div">
 						<div class="loader-div">
@@ -56,35 +60,87 @@
 				</div>
 				<p class="examplelabel">Examples of FASTA sequence:</p>
 				<p class="example">
-					<b>Antioxidant</b>
+					<b>Transcription Factor</b>
 					<br>
 					<span>
-						>Q55624
+						>Q9H161
 						<br>
-						MTEVLRVGQPAPDFTATAIVDQSFQTVKLSTYRGKYLVLFFYPLDFTFVC
+						MNAETCVSYCESPAAAMDAYYSPVSQSREGSSPFRAFPGGDKFGTTFLSAAAKAQGFGDAKSRARYGAGQ
 						<br>
-						PTEIIAFSDRHSEFTALDTEVVGISVDSEFSHLAWIQTERKMGGIGNINY
+						QDLATPLESGAGARGSFNKFQPQPSTPQPQPPPQPQPQQQQPQPQPPAQPHLYLQRGACKTPPDGSLKLQ
 						<br>
-						PLVSDLKKEISQAYNVLEPDAGIALRGLFIIDREGILQYATVNNLSFGRS
+						EGSSGHSAALQVPCYAKESSLGEPELPPDSDTVGMDSSYLSVKEAGVKGPQDRASSDLPSPLEKADSESN
 						<br>
-						VDETLRVLKAIRHVQSHPNEVCPVDWQEGDKTMIPDPEKAKTYFETVAEP
-
+						KGKKRRNRTTFTSYQLEELEKVFQKTHYPDVYAREQLAMRTDLTEARVQVWFQNRRAKWRKRERFGQMQQ
+						<br>
+						VRTHFSTAYELPLLTRAENYAQIQNPSWLGNNGAASPVPACVVPCDPVPACMSPHAHPPGSGASSVTDFL
+						<br>
+						SVSGAGSHVGQTHMGSLFGAASLSPGLNGYELNGEPDRKTSSIAALRMKAKEHSAAISWAT
 					</span>
 				</p>
 				<p class="example">
-					<b>Non-Antioxidant</b>
+					<b>Non-Transcription Factor</b>
 					<br>
 					<span>
-						>A6LP41
+						>spQ6PI48
 						<br>
-						MKIGVSGIQGDFREHKVMLERLGVEVLVVRKPEELDEVEGLVIPGGESTT
+						MYFPSWLSQLYRGLSRPIRRTTQPIWGSLYRSLLQSSQRRIPEFSSFVVRTNTCGELRSSHLGQEVTLCG
 						<br>
-						MIRIMKMVNLYEKLKEKILSGFPVFGTCAGMILLSKEVVNFKQDSLGVID
+						WIQYRRQNTFLVLRDFDGLVQVIIPQDESAASVKKILCEAPVESVVQVSGTVISRPAGQENPKMPTGEIE
 						<br>
-						IKVERNAYGRQVDSFETDVEIKGFDKSYRAIFIRAPKVVDYGNDVEVLSI
+						IKVKTAELLNACKKLPFEIKNFVKKTEALRLQYRYLDLRSFQMQYNLRLRSQMVMKMREYLCNLHGFVDI
 						<br>
-						YEDAPILLRQKKVLVASFHPELTEDTRVHEYFLSMVK
+						ETPTLFKRTPGGAKEFLVPSREPGKFYSLPQSPQQFKQLLMVGGLDRYFQVARCYRDEGSRPDRQPEFTQ
+						<br>
+						IDIEMSFVDQTGIQSLIEGLLQYSWPNDKDPVVVPFPTMTFAEVLATYGTDKPDTRFGMKIIDISDVFRN
+						<br>
+						TEIGFLQDALSKPHGTVKAICIPEGAKYLKRKDIESIRNFAADHFNQEILPVFLNANRNWNSPVANFIME
+						<br>
+						SQRLELIRLMETQEEDVVLLTAGEHNKACSLLGKLRLECADLLETRGVVLRDPTLFSFLWVVDFPLFLPK
+						<br>
+						EENPRELESAHHPFTAPHPSDIHLLYTEPKKARSQHYDLVLNGNEIGGGSIRIHNAELQRYILATLLKED
+						<br>
+						VKMLSHLLQALDYGAPPHGGIALGLDRLICLVTGSPSIRDVIAFPKSFRGHDLMSNTPDSVPPEELKPYH
+						<br>
+						IRVSKPTDSKAERAH
 					</span>
+				</p>
+				<p class="example">
+					<b>Transcription Factor Prefer Methylated DNA</b>
+					<br>
+					<span>
+						>P23769
+						<br>
+						MEVAPEQPRWMAHPAVLNAQHPDSHHPGLAHNYMEPAQLLPPDEVDVFFNHLDSQGNPYYANPAHARARV
+						<br>
+						SYSPAHARLTGGQMCRPHLLHSPGLPWLDGGKAALSAAAAHHHNPWTVSPFSKTPLHPSAAGGPGGPLSV
+						<br>
+						YPGAGGGSGGGSGSSVASLTPTAAHSGSHLFGFPPTPPKEVSPDPSTTGAASPASSSAGGSAARGEDKDG
+						<br>
+						VKYQVSLTESMKMESGSPLRPGLATMGTQPATHHPIPTYPSYVPAAAHDYSSGLFHPGGFLGGPASSFTP
+						<br>
+						KQRSKARSCSEGRECVNCGATATPLWRRDGTGHYLCNACGLYHKMNGQNRPLIKPKRRLSAARRAGTCCA
+						<br>
+						NCQTTTTTLWRRNANGDPVCNACGLYYKLHNVNRPLTMKKEGIQTRNRKMSNKSKKSKKGAECFEELSKC
+						<br>
+						MQEKSSPFSAAALAGHMAPVGHLPPFSHSGHILPTPTPIHPSSSLSFGHPHPSSMVTAMG
+					</span>
+				</p>
+				<p class="example">
+					<b>Transcription Factor Prefer Non-Methylated DNA</b>
+					<br>
+					<span>
+						>P09067
+						<br>
+						MSSYFVNSFSGRYPNGPDYQLLNYGSGSSLSGSYRDPAAMHTGSYGYNYNGMDLSVNRSSASSSHFGAVG
+						<br>
+						ESSRAFPAPAQEPRFRQAASSCSLSSPESLPCTNGDSHGAKPSASSPSDQATSASSSANFTEIDEASASS
+						<br>
+						EPEEAASQLSSPSLARAQPEPMATSTAAPEGQTPQIFPWMRKLHISHDMTGPDGKRARTAYTRYQTLELE
+						<br>
+						KEFHFNRYLTRRRRIEIAHALCLSERQIKIWFQNRRMKWKKDNKLKSMSLATAGSAFQP
+					</span>
+					
 				</p>
 			</form>
 		</div>
